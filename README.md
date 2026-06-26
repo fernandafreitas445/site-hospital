@@ -22,7 +22,8 @@ O sistema tem como objetivo desenvolver um portal para divulgação do hospital,
 ## Tecnologias 
 
 ### Front-end
-    • 
+    • React 
+    • JavaScript
 ### Back-end
     • Django 
     • Python
