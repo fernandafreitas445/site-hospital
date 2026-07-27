@@ -81,3 +81,21 @@ class DonationMethod(models.Model):
 
     def __str__(self):
         return f"{self.tipo} - {self.descricao}"
+
+
+class ContactMessage(models.Model):
+    nome = models.CharField(max_length=150, verbose_name="Nome")
+    email = models.EmailField(verbose_name="E-mail")
+    telefone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Telefone")
+    assunto = models.CharField(max_length=150, verbose_name="Assunto")
+    mensagem = models.TextField(verbose_name="Mensagem")
+    data_envio = models.DateTimeField(auto_now_add=True, verbose_name="Data de Envio")
+
+    class Meta:
+        verbose_name = "Mensagem de Contato"
+        verbose_name_plural = "Mensagens de Contato"
+        ordering = ["-data_envio"]
+
+    def __str__(self):
+        return f"{self.nome} - {self.assunto} ({self.data_envio.strftime('%d/%m/%Y %H:%M')})"
+

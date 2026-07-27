@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import HospitalInfo, Doctor, Achievement, DonationCampaign, DonationMethod
+from .models import HospitalInfo, Doctor, Achievement, DonationCampaign, DonationMethod, ContactMessage
 
 class HospitalInfoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,3 +29,10 @@ class DonationMethodSerializer(serializers.ModelSerializer):
     class Meta:
         model = DonationMethod
         fields = '__all__'
+
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = '__all__'
+

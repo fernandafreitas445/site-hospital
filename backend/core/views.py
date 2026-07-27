@@ -1,13 +1,21 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import HospitalInfo, Doctor, Achievement, DonationCampaign, DonationMethod
+from .models import HospitalInfo, Doctor, Achievement, DonationCampaign, DonationMethod, ContactMessage
 from .serializers import (
     HospitalInfoSerializer,
     DoctorSerializer,
     AchievementSerializer,
     DonationCampaignSerializer,
     DonationMethodSerializer,
+    ContactMessageSerializer,
 )
+
+class AllowPostOrAdminOnly(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method == 'POST':
+            return True
+        return request.user and request.user.is_staff
+
 
 class HospitalInfoViewSet(viewsets.ModelViewSet):
     queryset = HospitalInfo.objects.all()
@@ -37,3 +45,10 @@ class DonationMethodViewSet(viewsets.ModelViewSet):
     queryset = DonationMethod.objects.all()
     serializer_class = DonationMethodSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+class ContactMessageViewSet(viewsets.ModelViewSet):
+    queryset = ContactMessage.objects.all()
+    serializer_class = ContactMessageSerializer
+    permission_classes = [AllowPostOrAdminOnly]
+

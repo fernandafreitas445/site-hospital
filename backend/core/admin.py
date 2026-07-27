@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import HospitalInfo, Doctor, Achievement, DonationCampaign, DonationMethod
+from .models import HospitalInfo, Doctor, Achievement, DonationCampaign, DonationMethod, ContactMessage
 
 @admin.register(HospitalInfo)
 class HospitalInfoAdmin(admin.ModelAdmin):
@@ -40,3 +40,12 @@ class DonationMethodAdmin(admin.ModelAdmin):
     list_filter = ("ativo", "tipo")
     search_fields = ("tipo", "descricao")
     list_editable = ("ativo",)
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ("nome", "email", "assunto", "data_envio")
+    readonly_fields = ("nome", "email", "telefone", "assunto", "mensagem", "data_envio")
+    search_fields = ("nome", "email", "assunto", "mensagem")
+    list_filter = ("data_envio",)
+
