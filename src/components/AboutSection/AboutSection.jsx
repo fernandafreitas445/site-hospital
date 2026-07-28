@@ -1,7 +1,11 @@
 import "./AboutSection.css";
 import sobre from "../../assets/images/sobre.png";
+import { useNavigate } from "react-router-dom";
 
 function AboutSection() {
+
+    const navigate = useNavigate();
+
     return (
         <section className="about">
 
@@ -32,7 +36,7 @@ function AboutSection() {
                         eficiente, colocando sempre o paciente no centro do cuidado.
                     </p>
 
-                    <button>
+                    <button onClick={() => navigate("/sobre")}>
                         Saiba mais
                     </button>
 

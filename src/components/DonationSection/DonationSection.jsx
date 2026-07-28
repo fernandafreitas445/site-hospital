@@ -1,7 +1,11 @@
 import "./DonationSection.css";
 import { FaHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function DonationSection() {
+
+    const navigate = useNavigate();
+
     return (
         <section className="donation">
 
@@ -25,7 +29,7 @@ function DonationSection() {
                         aos nossos pacientes.
                     </p>
 
-                    <button>
+                    <button onClick={() => navigate("/doacoes")}>
                         Quero Doar
                     </button>
 

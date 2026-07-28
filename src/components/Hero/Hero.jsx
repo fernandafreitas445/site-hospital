@@ -1,7 +1,11 @@
 import "./Hero.css";
-import hospital from "../../assets/images/hospital.png"
+import hospital from "../../assets/images/hospital.png";
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+
+    const navigate = useNavigate();
+
     return (
         <section className="hero">
 
@@ -26,11 +30,11 @@ function Hero() {
 
                     <div className="hero-buttons">
 
-                        <button className="btn-primary">
+                        <button className="btn-primary" onClick={() => navigate("/servicos")}>
                         Conheça nossos serviços
                         </button>
 
-                        <button className="btn-outline">
+                        <button className="btn-outline" onClick={() => navigate("/contato")}>
                         Fale conosco
                         </button>
 

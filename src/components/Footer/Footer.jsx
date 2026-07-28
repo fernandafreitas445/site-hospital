@@ -45,7 +45,7 @@ function Footer(){
 
                         <li><a to="/">Início</a></li>
 
-                        <li><arguments to="/sobre">Sobre</arguments></li>
+                        <li><a to="/sobre">Sobre</a></li>
 
                         <li><a to="/servicos">Serviços</a></li>
 
