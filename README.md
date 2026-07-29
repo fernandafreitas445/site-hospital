@@ -6,7 +6,7 @@ A plataforma busca proporcionar uma experiência intuitiva, moderna e responsiva
 
 ## Escopo
 
-O sistema tem como objetivo desenvolver um portal para divulgação do hospital, contemplando as seguintes funcionalidades:
+### O sistema tem como objetivo desenvolver um portal para divulgação do hospital, contemplando as seguintes funcionalidades:
     • Página inicial com apresentação institucional;
     • Exibição da missão, visão e valores;
     • Listagem dos médicos vinculados ao hospital;
@@ -15,9 +15,8 @@ O sistema tem como objetivo desenvolver um portal para divulgação do hospital,
     • Página de campanhas de doação;
     • Informações sobre formas de doação;
     • Página de contato;
-    • Sistema de login para administradores;
+    • Sistema para administradores;
     • Atualização das informações exibidas nas páginas por um administrador
-    • Layout responsivo para dispositivos móveis e desktops.
     
 ## Tecnologias 
 
@@ -33,4 +32,3 @@ O sistema tem como objetivo desenvolver um portal para divulgação do hospital,
 ### Versionamento
     • Git
     • GitHub
->>>>>>> 91748680bcaac7a50688dfe233b90a3a3ca73c50
