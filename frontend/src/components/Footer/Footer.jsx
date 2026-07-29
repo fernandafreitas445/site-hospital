@@ -1,0 +1,116 @@
+import "./Footer.css";
+import logo from "../../assets/images/logo_hosp.jpg";
+import {
+    FaPhoneAlt,
+    FaEnvelope,
+    FaMapMarkerAlt,
+    FaClock
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useHospitalInfo } from "../../hooks/useApi";
+
+function Footer() {
+    const { data: info, loading } = useHospitalInfo();
+
+    return (
+
+        <footer className="footer">
+
+            <div className="container footer-grid">
+
+                <div>
+
+                    <img
+                        src={logo}
+                        alt="Hospital"
+                        className="footer-logo"
+                    />
+
+                    <p>
+                        Cuidando da saúde da comunidade
+                        com excelência, acolhimento e
+                        compromisso.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3>Institucional</h3>
+
+                    <ul>
+
+                        <li><Link to="/">Início</Link></li>
+
+                        <li><Link to="/sobre">Sobre</Link></li>
+
+                        <li><Link to="/servicos">Serviços</Link></li>
+
+                        <li><Link to="/medicos">Médicos</Link></li>
+
+                        <li><Link to="/doacoes">Doações</Link></li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h3>Contato</h3>
+
+                    <ul>
+
+                        <li>
+                            <FaMapMarkerAlt />
+                            {loading ? " Bambuí - MG" : ` ${info?.address}`}
+                        </li>
+
+                        <li>
+                            <FaPhoneAlt />
+                            {loading ? " (37) 3417-0241" : ` ${info?.phone}`}
+                        </li>
+
+                        <li>
+                            <FaEnvelope />
+                            {loading ? " hospitalnsbrasil@yahoo.com.br" : ` ${info?.email}`}
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h3>Atendimento</h3>
+
+                    <ul>
+
+                        <li>
+                            <FaClock />
+                            {loading ? " Atendimento 24 horas" : ` ${info?.working_hours}`}
+                        </li>
+
+                        <li>Emergência</li>
+
+                        <li>Internação</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div className="footer-bottom">
+
+                © 2026 Hospital Nossa Senhora do Brasil.
+                Todos os direitos reservados.
+
+            </div>
+
+        </footer>
+
+    )
+
+}
+
+export default Footer;

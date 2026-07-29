@@ -28,6 +28,7 @@ O sistema tem como objetivo desenvolver um portal para divulgação do hospital,
     • Django 
     • Python
 ### Banco de dados
+    • Sqlite
     • PostgreSQL
 ### Versionamento
     • Git

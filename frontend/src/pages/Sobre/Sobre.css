@@ -1,0 +1,131 @@
+.page-header{
+
+    background:#f8fbff;
+
+    padding:90px 0;
+
+    text-align:center;
+
+}
+
+.page-header h1{
+
+    font-size:48px;
+
+    margin-bottom:20px;
+
+}
+
+.page-header p{
+
+    max-width:650px;
+
+    margin:auto;
+
+    color:var(--text-light);
+
+}
+
+.about-page{
+
+    padding:100px 0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:70px;
+
+}
+
+.about-image{
+
+    flex:1;
+
+}
+
+.about-image img{
+
+    width:100%;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.about-text{
+
+    flex:1;
+
+}
+
+.about-text h2{
+
+    margin-bottom:25px;
+
+}
+
+.about-text p{
+
+    margin-bottom:20px;
+
+    line-height:1.9;
+
+    color:var(--text-light);
+
+}
+
+.mission{
+
+    background:#f8fbff;
+
+    padding:90px 0;
+
+}
+
+.mission-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.mission-grid div{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.mission-grid h3{
+
+    color:var(--primary);
+
+    margin-bottom:18px;
+
+}
+
+@media(max-width:900px){
+
+    .about-page{
+
+        flex-direction:column;
+
+    }
+
+    .mission-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
