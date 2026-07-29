@@ -33,4 +33,3 @@ O sistema tem como objetivo desenvolver um portal para divulgação do hospital,
 ### Versionamento
     • Git
     • GitHub
->>>>>>> 91748680bcaac7a50688dfe233b90a3a3ca73c50
