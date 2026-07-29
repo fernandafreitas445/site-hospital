@@ -1,7 +1,17 @@
 import "./Hero.css";
-import hospital from "../../assets/images/hospital.png"
+import { useNavigate } from "react-router-dom";
+import { useHospitalImages } from "../../hooks/useApi";
+import hospitalFallback from "../../assets/images/hospital.png";
 
 function Hero() {
+    const navigate = useNavigate();
+    const { data: images, loading } = useHospitalImages();
+
+    // Pega a primeira imagem cadastrada no banco; usa o fallback local se ainda não carregou
+    const heroImage = !loading && images.length > 0
+        ? images[0].image
+        : hospitalFallback;
+
     return (
         <section className="hero">
 
@@ -26,12 +36,12 @@ function Hero() {
 
                     <div className="hero-buttons">
 
-                        <button className="btn-primary">
-                        Conheça nossos serviços
+                        <button className="btn-primary" onClick={() => navigate("/servicos")}>
+                            Conheça nossos serviços
                         </button>
 
-                        <button className="btn-outline">
-                        Fale conosco
+                        <button className="btn-outline" onClick={() => navigate("/contato")}>
+                            Fale conosco
                         </button>
 
                     </div>
@@ -41,8 +51,8 @@ function Hero() {
                 <div className="hero-image">
 
                     <img
-                        src={hospital}
-                        alt="Hospital"
+                        src={heroImage}
+                        alt="Hospital Nossa Senhora do Brasil"
                     />
 
                 </div>

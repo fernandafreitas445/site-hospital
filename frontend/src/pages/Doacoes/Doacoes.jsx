@@ -1,134 +1,114 @@
-import { useState, useEffect } from "react";
 import "./Doacoes.css";
-import { getDonationCampaigns, getDonationMethods } from "../../services/api";
-import { FaHeart, FaCopy, FaCheck } from "react-icons/fa";
+
+import { FaHandHoldingHeart, FaPix, FaHospital, FaHeart } from "react-icons/fa6";
+import { useState } from "react";
+import { useHospitalInfo } from "../../hooks/useApi";
 
 function Doacoes() {
-    const [campaigns, setCampaigns] = useState([]);
-    const [methods, setMethods] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [copiedId, setCopiedId] = useState(null);
+    const { data: info, loading } = useHospitalInfo();
+    const [copied, setCopied] = useState(false);
 
-    useEffect(() => {
-        Promise.all([getDonationCampaigns(), getDonationMethods()])
-            .then(([campaignsData, methodsData]) => {
-                setCampaigns(campaignsData.filter(camp => camp.ativa));
-                setMethods(methodsData.filter(method => method.ativo));
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error("Erro ao carregar dados de doação:", err);
-                setLoading(false);
-            });
-    }, []);
+    const pixKey = loading ? "..." : (info?.pix_key ?? "hospitalnsbrasil@yahoo.com.br");
 
-    const handleCopyPix = (key, id) => {
-        navigator.clipboard.writeText(key)
-            .then(() => {
-                setCopiedId(id);
-                setTimeout(() => setCopiedId(null), 2000);
-            })
-            .catch(err => {
-                console.error("Erro ao copiar chave pix:", err);
-            });
+    const handleCopy = () => {
+        navigator.clipboard.writeText(pixKey).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2500);
+        });
     };
 
     return (
-        <div className="doacoes-page">
-            <div className="container">
-                
-                <div className="doacoes-header">
-                    <span>Faça a Diferença</span>
-                    <h1>Campanhas de Doação</h1>
+
+        <main>
+
+            <section className="page-header">
+
+                <div className="container">
+
+                    <h1>Faça uma Doação</h1>
+
                     <p>
-                        O Hospital Nossa Senhora do Brasil é uma instituição que conta com o apoio 
-                        da comunidade. Sua contribuição nos ajuda a salvar vidas, melhorar nossa 
-                        estrutura e adquirir novos equipamentos de saúde.
+                        Sua solidariedade ajuda a manter um atendimento de qualidade
+                        e faz a diferença na vida de muitas pessoas.
                     </p>
+
                 </div>
 
-                {loading ? (
-                    <div className="text-center py-5">
-                        <div className="spinner-border text-danger" role="status">
-                            <span className="visually-hidden">Carregando...</span>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="doacoes-layout-grid">
-                        
-                        {/* Lado Esquerdo: Campanhas Ativas */}
-                        <div>
-                            <h2 className="campaigns-section-title">Campanhas Ativas</h2>
-                            {campaigns.length > 0 ? (
-                                campaigns.map((campaign) => (
-                                    <div className="campaign-card-item" key={campaign.id}>
-                                        <div className="campaign-body">
-                                            <h3>{campaign.titulo}</h3>
-                                            <p>{campaign.descricao}</p>
-                                            
-                                            {/* Bloco de doação Pix */}
-                                            <div className="pix-box-wrapper">
-                                                <div className="pix-title">Doe via PIX</div>
-                                                <div className="pix-key-row">
-                                                    <span className="pix-key-text">{campaign.chave_pix}</span>
-                                                    <button 
-                                                        className="copy-pix-btn"
-                                                        onClick={() => handleCopyPix(campaign.chave_pix, campaign.id)}
-                                                    >
-                                                        {copiedId === campaign.id ? (
-                                                            <>
-                                                                <FaCheck style={{ marginRight: "5px" }} /> Copiado!
-                                                            </>
-                                                        ) : (
-                                                            <>
-                                                                <FaCopy style={{ marginRight: "5px" }} /> Copiar Chave
-                                                            </>
-                                                        )}
-                                                    </button>
-                                                </div>
-                                                <div className="pix-beneficiary">
-                                                    <strong>Beneficiário:</strong> {campaign.beneficiario}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="no-campaigns">
-                                    <FaHeart size={40} color="#dc3545" style={{ marginBottom: "15px" }} />
-                                    <h3>Nenhuma campanha ativa no momento</h3>
-                                    <p>Mas você ainda pode contribuir utilizando as formas de doação fixa ao lado!</p>
-                                </div>
-                            )}
-                        </div>
+            </section>
 
-                        {/* Lado Direito: Formas de Doação Fixas */}
-                        <div>
-                            <h2 className="methods-section-title">Outras Formas de Contribuir</h2>
-                            {methods.length > 0 ? (
-                                methods.map((method) => (
-                                    <div className="method-card-item" key={method.id}>
-                                        <h4>{method.tipo}</h4>
-                                        <p className="method-desc">{method.descricao}</p>
-                                        <div className="method-instructions">
-                                            <strong>Como fazer:</strong>
-                                            <p style={{ margin: "5px 0 0 0" }}>{method.instrucoes}</p>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="no-campaigns">
-                                    <p>Nenhuma forma de doação fixa cadastrada.</p>
-                                </div>
-                            )}
+            <section className="donation-page">
+
+                <div className="container donation-grid">
+
+                    <div className="donation-text">
+
+                        <span>APOIE NOSSO HOSPITAL</span>
+
+                        <h2>
+                            Juntos podemos cuidar de mais vidas.
+                        </h2>
+
+                        <p>
+                            As doações contribuem para melhorias na estrutura,
+                            aquisição de equipamentos, medicamentos e projetos
+                            voltados ao atendimento humanizado.
+                        </p>
+
+                        <div className="donation-benefits">
+
+                            <div>
+                                <FaHospital />
+                                <p>Melhoria da infraestrutura</p>
+                            </div>
+
+                            <div>
+                                <FaHeart />
+                                <p>Atendimento humanizado</p>
+                            </div>
+
+                            <div>
+                                <FaHandHoldingHeart />
+                                <p>Apoio à comunidade</p>
+                            </div>
+
                         </div>
 
                     </div>
-                )}
 
-            </div>
-        </div>
+                    <div className="donation-card">
+
+                        <FaPix className="pix-icon"/>
+
+                        <h3>Doe via PIX</h3>
+
+                        <p>
+
+                            Chave PIX
+
+                        </p>
+
+                        <div className="pix-key">
+
+                            {loading ? "Carregando..." : pixKey}
+
+                        </div>
+
+                        <button onClick={handleCopy} disabled={loading}>
+
+                            {copied ? "✓ Chave copiada!" : "Copiar chave PIX"}
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
     );
+
 }
 
-export default Doacoes;
+export default Doacoes;

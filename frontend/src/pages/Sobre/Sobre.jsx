@@ -1,120 +1,118 @@
-import { useState, useEffect } from "react";
 import "./Sobre.css";
-import { getHospitalInfo, getAchievements } from "../../services/api";
-import { FaBullseye, FaEye, FaHeart } from "react-icons/fa";
+import hospitalFallback from "../../assets/images/hospital.png";
+import { useHospitalInfo, useHospitalImages } from "../../hooks/useApi";
 
 function Sobre() {
-    const [hospitalInfo, setHospitalInfo] = useState(null);
-    const [achievements, setAchievements] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { data: info, loading: loadingInfo } = useHospitalInfo();
+    const { data: images, loading: loadingImages } = useHospitalImages();
 
-    useEffect(() => {
-        Promise.all([getHospitalInfo(), getAchievements()])
-            .then(([infoData, achievementsData]) => {
-                setHospitalInfo(infoData);
-                // Ordena por data_realizacao decrescente
-                const sortedAchievements = achievementsData.sort((a, b) => 
-                    new Date(b.data_realizacao) - new Date(a.data_realizacao)
-                );
-                setAchievements(sortedAchievements);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error("Erro ao carregar dados institucionais:", err);
-                setLoading(false);
-            });
-    }, []);
-
-    // Formata a data (ex: 2025-10-15 -> Outubro de 2025)
-    const formatMonthYear = (dateStr) => {
-        if (!dateStr) return "";
-        const date = new Date(dateStr + "T00:00:00");
-        return date.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
-    };
+    const hospitalImage = !loadingImages && images.length > 0
+        ? images[0].image
+        : hospitalFallback;
 
     return (
-        <div className="sobre-page">
-            <div className="container">
-                
-                <div className="sobre-header">
-                    <span>Quem Somos</span>
-                    <h1>Nossa História</h1>
+
+        <main className="sobre">
+
+            <section className="page-header">
+
+                <div className="container">
+
+                    <h1>Sobre o Hospital</h1>
+
+                    <p>
+                        Conheça nossa história, missão e compromisso
+                        com a saúde da comunidade.
+                    </p>
+
                 </div>
 
-                {loading ? (
-                    <div className="text-center py-5">
-                        <div className="spinner-border text-primary" role="status">
-                            <span className="visually-hidden">Carregando...</span>
-                        </div>
+            </section>
+
+            <section className="container about-page">
+
+                <div className="about-image">
+
+                    <img
+                        src={loadingImages ? hospitalFallback : hospitalImage}
+                        alt="Hospital"
+                    />
+
+                </div>
+
+                <div className="about-text">
+
+                    <h2>Excelência em atendimento.</h2>
+
+                    <p>
+                        {loadingInfo
+                            ? "O Hospital Nossa Senhora do Brasil atua há décadas oferecendo assistência médica de qualidade, sempre priorizando o cuidado humanizado, a ética e o respeito aos pacientes."
+                            : info?.about_text_1}
+                    </p>
+
+                    <p>
+                        {loadingInfo
+                            ? "Nossa estrutura foi planejada para proporcionar conforto, segurança e atendimento eficiente, contando com profissionais altamente capacitados."
+                            : info?.about_text_2}
+                    </p>
+
+                    <p>
+                        Trabalhamos diariamente para promover saúde,
+                        bem-estar e qualidade de vida para toda a comunidade.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <section className="mission">
+
+                <div className="container mission-grid">
+
+                    <div>
+
+                        <h3>Missão</h3>
+
+                        <p>
+                            {loadingInfo
+                                ? "Promover atendimento humanizado e de excelência."
+                                : info?.mission}
+                        </p>
+
                     </div>
-                ) : (
-                    <>
-                        {/* História */}
-                        <div className="historia-section">
-                            <div className="historia-content">
-                                <h2>Compromisso com a sua saúde</h2>
-                                <p>
-                                    {hospitalInfo ? hospitalInfo.historia : (
-                                        "O Hospital Nossa Senhora do Brasil atua oferecendo atendimento " +
-                                        "humanizado, estrutura moderna e uma equipe preparada para atender " +
-                                        "pacientes com qualidade, ética e responsabilidade."
-                                    )}
-                                </p>
-                            </div>
-                            <div className="historia-decor-box">
-                                <h3>Desde 1985</h3>
-                                <p>
-                                    Cuidando da comunidade de Bambuí e região com foco na acolhida 
-                                    calorosa, diagnósticos precisos e tratamentos inovadores.
-                                </p>
-                            </div>
-                        </div>
 
-                        {/* Missão, Visão e Valores */}
-                        <div className="mvv-grid">
-                            <div className="mvv-card">
-                                <FaBullseye className="mvv-icon" />
-                                <h3>Missão</h3>
-                                <p>{hospitalInfo ? hospitalInfo.missao : "Promover a saúde e bem-estar dos pacientes."}</p>
-                            </div>
-                            <div className="mvv-card">
-                                <FaEye className="mvv-icon" />
-                                <h3>Visão</h3>
-                                <p>{hospitalInfo ? hospitalInfo.visao : "Ser referência regional em excelência hospitalar."}</p>
-                            </div>
-                            <div className="mvv-card">
-                                <FaHeart className="mvv-icon" />
-                                <h3>Valores</h3>
-                                <p>{hospitalInfo ? hospitalInfo.valores : "Humanização, Ética, Excelência, Segurança."}</p>
-                            </div>
-                        </div>
+                    <div>
 
-                        {/* Linha do Tempo de Realizações */}
-                        {achievements.length > 0 && (
-                            <div style={{ marginTop: "100px" }}>
-                                <h2 className="timeline-section-title">Nossas Conquistas e Realizações</h2>
-                                <div className="timeline-container">
-                                    {achievements.map((ach, index) => {
-                                        const alignmentClass = index % 2 === 0 ? "timeline-item left-item" : "timeline-item right-item";
-                                        return (
-                                            <div className={alignmentClass} key={ach.id || index}>
-                                                <div className="timeline-content">
-                                                    <span className="timeline-date">{formatMonthYear(ach.data_realizacao)}</span>
-                                                    <h3>{ach.titulo}</h3>
-                                                    <p>{ach.descricao}</p>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        )}
-                    </>
-                )}
+                        <h3>Visão</h3>
 
-            </div>
-        </div>
-    );
+                        <p>
+                            {loadingInfo
+                                ? "Ser referência regional em qualidade hospitalar."
+                                : info?.vision}
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <h3>Valores</h3>
+
+                        <p>
+                            {loadingInfo
+                                ? "Ética, respeito, compromisso e inovação."
+                                : info?.values}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    )
+
 }
 
-export default Sobre;
+export default Sobre;

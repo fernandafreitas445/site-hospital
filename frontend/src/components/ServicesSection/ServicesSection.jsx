@@ -1,48 +1,12 @@
 import "./ServicesSection.css";
-
-import {
-    FaHeartbeat,
-    FaUserMd,
-    FaAmbulance,
-    FaBaby,
-    FaFlask,
-    FaProcedures
-} from "react-icons/fa";
+import { useServices } from "../../hooks/useApi";
+import { getIcon } from "../../utils/iconMap";
 
 function ServicesSection() {
+    const { data: services, loading } = useServices();
 
-    const services = [
-        {
-            icon: <FaUserMd />,
-            title: "Clínica Médica",
-            text: "Atendimento clínico com foco na prevenção, diagnóstico e tratamento."
-        },
-        {
-            icon: <FaHeartbeat />,
-            title: "Cardiologia",
-            text: "Cuidados especializados para a saúde do coração."
-        },
-        {
-            icon: <FaBaby />,
-            title: "Pediatria",
-            text: "Atendimento dedicado à saúde de crianças e adolescentes."
-        },
-        {
-            icon: <FaFlask />,
-            title: "Exames",
-            text: "Exames laboratoriais e apoio ao diagnóstico."
-        },
-        {
-            icon: <FaProcedures />,
-            title: "Internação",
-            text: "Estrutura preparada para internações com conforto e segurança."
-        },
-        {
-            icon: <FaAmbulance />,
-            title: "Urgência e Emergência",
-            text: "Atendimento rápido para situações de urgência e emergência."
-        }
-    ];
+    // Exibe apenas os primeiros 6 serviços na seção da Home
+    const displayServices = services.slice(0, 6);
 
     return (
 
@@ -65,25 +29,29 @@ function ServicesSection() {
 
                 </div>
 
-                <div className="services-grid">
+                {loading ? (
+                    <p style={{ textAlign: 'center', color: '#666' }}>Carregando serviços...</p>
+                ) : (
+                    <div className="services-grid">
 
-                    {services.map((service, index) => (
+                        {displayServices.map((service) => (
 
-                    <div className="service-card" key={index}>
+                            <div className="service-card" key={service.id}>
 
-                        <div className="service-icon">
-                            {service.icon}
-                        </div>
+                                <div className="service-icon">
+                                    {getIcon(service.icon)}
+                                </div>
 
-                        <h3>{service.title}</h3>
+                                <h3>{service.title}</h3>
 
-                        <p>{service.text}</p>
+                                <p>{service.text}</p>
+
+                            </div>
+
+                        ))}
 
                     </div>
-
-                    ))}
-
-                </div>
+                )}
 
             </div>
 

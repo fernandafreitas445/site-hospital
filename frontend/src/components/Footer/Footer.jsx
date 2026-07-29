@@ -1,19 +1,18 @@
 import "./Footer.css";
-
 import logo from "../../assets/images/logo_hosp.jpg";
-
 import {
     FaPhoneAlt,
     FaEnvelope,
     FaMapMarkerAlt,
     FaClock
 } from "react-icons/fa";
-
 import { Link } from "react-router-dom";
+import { useHospitalInfo } from "../../hooks/useApi";
 
-function Footer(){
+function Footer() {
+    const { data: info, loading } = useHospitalInfo();
 
-    return(
+    return (
 
         <footer className="footer">
 
@@ -28,11 +27,9 @@ function Footer(){
                     />
 
                     <p>
-
                         Cuidando da saúde da comunidade
                         com excelência, acolhimento e
                         compromisso.
-
                     </p>
 
                 </div>
@@ -63,11 +60,20 @@ function Footer(){
 
                     <ul>
 
-                        <li><FaMapMarkerAlt/> Bambuí - MG</li>
+                        <li>
+                            <FaMapMarkerAlt />
+                            {loading ? " Bambuí - MG" : ` ${info?.address}`}
+                        </li>
 
-                        <li><FaPhoneAlt/> (37) 3431-0000</li>
+                        <li>
+                            <FaPhoneAlt />
+                            {loading ? " (37) 3417-0241" : ` ${info?.phone}`}
+                        </li>
 
-                        <li><FaEnvelope/> contato@hospital.com.br</li>
+                        <li>
+                            <FaEnvelope />
+                            {loading ? " hospitalnsbrasil@yahoo.com.br" : ` ${info?.email}`}
+                        </li>
 
                     </ul>
 
@@ -79,7 +85,10 @@ function Footer(){
 
                     <ul>
 
-                        <li><FaClock/> Atendimento 24 horas</li>
+                        <li>
+                            <FaClock />
+                            {loading ? " Atendimento 24 horas" : ` ${info?.working_hours}`}
+                        </li>
 
                         <li>Emergência</li>
 
