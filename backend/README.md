@@ -24,7 +24,19 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Configurar o banco de dados
+### 4. Criar arquivo .env
+
+`SECRET_KEY=django-insecure-site-hospital-key-2026-very-secure
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+DB_NAME=hospital_db
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_HOST=localhost
+DB_PORT=5432
+USE_SQLITE=True`
+
+### 5. Configurar o banco de dados
 
 **Opção A — SQLite**  
 No arquivo `.env`:
@@ -40,13 +52,13 @@ USE_SQLITE=True
 docker compose up -d
 ```
 
-### 5. Aplicar as migrações
+### 6. Aplicar as migrações
 
 ```bash
 python manage.py migrate
 ```
 
-### 6. Carregar os dados iniciais
+### 7. Carregar os dados iniciais
 
 ```bash
 python manage.py load_initial_data
@@ -54,19 +66,19 @@ python manage.py load_initial_data
 
 > Este comando popula o banco com as informações do hospital, serviços, médicos e copia as imagens do frontend para a pasta `media/`.
 
-### 7. Criar superusuário (para o painel Admin)
+### 8. Criar superusuário (para o painel Admin)
 
 ```bash
 python manage.py createsuperuser
 ```
 > Ou use o já criado: usuário `admin` / senha `admin123`
 
-### 8. Iniciar o servidor
+### 9. Iniciar o servidor
 
 ```bash
 python manage.py runserver
 ```
 
-O backend disponível em: **http://localhost:8000**
-Painel Admin:  **http://localhost:8000/admin/**
+> O backend disponível em: **http://localhost:8000**
+> Painel Admin:  **http://localhost:8000/admin/**
 
