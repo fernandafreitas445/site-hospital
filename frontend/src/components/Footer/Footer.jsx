@@ -1,5 +1,5 @@
 import "./Footer.css";
-import logo from "../../assets/images/logo_hosp.jpg";
+import logo from "../../assets/images/logo_hosp.png";
 import {
     FaPhoneAlt,
     FaEnvelope,

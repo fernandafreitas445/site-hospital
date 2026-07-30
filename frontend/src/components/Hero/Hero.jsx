@@ -7,9 +7,9 @@ function Hero() {
     const navigate = useNavigate();
     const { data: images, loading } = useHospitalImages();
 
-    // Pega a primeira imagem cadastrada no banco; usa o fallback local se ainda não carregou
+    // Busca a imagem hospital1 cadastrada no banco; usa o fallback local se ainda não carregou
     const heroImage = !loading && images.length > 0
-        ? images[0].image
+        ? (images.find(img => img.image?.includes('hospital1'))?.image || images[0].image)
         : hospitalFallback;
 
     return (

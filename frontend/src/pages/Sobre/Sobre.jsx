@@ -7,7 +7,7 @@ function Sobre() {
     const { data: images, loading: loadingImages } = useHospitalImages();
 
     const hospitalImage = !loadingImages && images.length > 0
-        ? images[0].image
+        ? (images.find(img => img.image?.includes('hospital2'))?.image || (images.length > 1 ? images[1].image : images[0].image))
         : hospitalFallback;
 
     return (
