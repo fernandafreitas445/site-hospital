@@ -46,8 +46,6 @@ function Footer() {
 
                         <li><Link to="/servicos">Serviços</Link></li>
 
-                        <li><Link to="/medicos">Médicos</Link></li>
-
                         <li><Link to="/doacoes">Doações</Link></li>
 
                     </ul>

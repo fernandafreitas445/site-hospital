@@ -1,164 +1,339 @@
-.donation-page{
+.donation-page {
+    padding: 100px 0;
+}
 
-    padding:100px 0;
+.donation-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+
+/* Texto */
+
+.donation-text span {
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+.donation-text h2 {
+    margin: 20px 0;
+    font-size: 42px;
+    line-height: 1.2;
+}
+
+.donation-text p {
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+
+/* Benefícios */
+
+.donation-benefits {
+    margin-top: 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.donation-benefits div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    font-size: 18px;
+}
+
+.donation-benefits p {
+    margin: 0;
+}
+
+.donation-benefits svg {
+    color: var(--primary);
+    font-size: 28px;
+    min-width: 28px;
+}
+
+
+/* Card PIX */
+
+.donation-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow);
+
+    padding: 45px;
+
+    text-align: center;
+
+    width: 100%;
+}
+
+
+.pix-icon {
+
+    font-size: 60px;
+
+    color: var(--primary);
 
 }
 
-.donation-grid{
 
-    display:grid;
+.donation-card img {
 
-    grid-template-columns:2fr 1fr;
+    width: 100%;
 
-    gap:70px;
+    max-width: 220px;
 
-    align-items:center;
+    height: auto;
 
-}
+    margin: 25px auto;
 
-.donation-text span{
-
-    color:var(--primary);
-
-    font-weight:600;
-
-    letter-spacing:2px;
-
-    font-size:14px;
+    display: block;
 
 }
 
-.donation-text h2{
 
-    margin:20px 0;
+.donation-card p {
 
-    font-size:42px;
-
-}
-
-.donation-text p{
-
-    color:var(--text-light);
-
-    line-height:1.8;
+    margin-bottom: 10px;
 
 }
 
-.donation-benefits{
 
-    margin-top:40px;
+.pix-key {
 
-    display:flex;
+    background: #f5f7fa;
 
-    flex-direction:column;
+    padding: 18px;
 
-    gap:25px;
+    border-radius: 10px;
 
-}
+    margin: 20px 0;
 
-.donation-benefits div{
+    font-weight: 600;
 
-    display:flex;
+    border: 1px dashed var(--primary);
 
-    align-items:center;
-
-    gap:20px;
-
-    font-size:18px;
+    overflow-wrap: break-word;
 
 }
 
-.donation-benefits svg{
 
-    color:var(--primary);
+.donation-card button {
 
-    font-size:28px;
+    width: 100%;
 
-}
+    border: none;
 
-.donation-card{
+    background: var(--primary);
 
-    background:white;
+    color: white;
 
-    border-radius:20px;
+    padding: 16px;
 
-    box-shadow:var(--shadow);
+    border-radius: 10px;
 
-    padding:45px;
+    cursor: pointer;
 
-    text-align:center;
+    margin-bottom: 15px;
 
-}
+    transition: .3s;
 
-.pix-icon{
-
-    font-size:60px;
-
-    color:var(--primary);
+    font-size: 16px;
 
 }
 
-.donation-card h3{
 
-    margin:20px 0;
+.donation-card button:hover {
 
-}
-
-.pix-key{
-
-    background:#f5f7fa;
-
-    padding:18px;
-
-    border-radius:10px;
-
-    margin:20px 0;
-
-    font-weight:600;
-
-    border:1px dashed var(--primary);
+    background: var(--primary-hover);
 
 }
 
-.donation-card button{
+@media(max-width: 1100px) {
 
-    width:100%;
+    .donation-grid {
 
-    border:none;
+        gap: 40px;
 
-    background:var(--primary);
+    }
 
-    color:white;
 
-    padding:16px;
+    .donation-text h2 {
 
-    border-radius:10px;
+        font-size: 36px;
 
-    cursor:pointer;
+    }
 
-    margin-bottom:15px;
 
-    transition:.3s;
+    .donation-card {
 
-}
+        padding: 35px;
 
-.donation-card button:hover{
-
-    background:var(--primary-hover);
+    }
 
 }
 
-.donation-card small{
+@media(max-width: 900px) {
 
-    color:gray;
+    .donation-page {
+
+        padding: 70px 0;
+
+    }
+
+
+    .donation-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+    }
+
+
+    .donation-text {
+
+        text-align: center;
+
+    }
+
+
+    .donation-benefits {
+
+        align-items: flex-start;
+
+        max-width: 400px;
+
+        margin: 40px auto 0;
+
+    }
+
 
 }
 
-@media(max-width:900px){
+@media(max-width: 600px) {
 
-    .donation-grid{
+    .donation-page {
 
-        grid-template-columns:1fr;
+        padding: 50px 0;
+
+    }
+
+
+    .donation-text span {
+
+        font-size: 12px;
+
+        letter-spacing: 1.5px;
+
+    }
+
+
+    .donation-text h2 {
+
+        font-size: 28px;
+
+        margin: 15px 0;
+
+    }
+
+
+    .donation-text p {
+
+        font-size: 15px;
+
+        line-height: 1.7;
+
+    }
+
+
+    .donation-benefits {
+
+        gap: 20px;
+
+    }
+
+
+    .donation-benefits div {
+
+        font-size: 16px;
+
+        gap: 15px;
+
+    }
+
+
+    .donation-benefits svg {
+
+        font-size: 24px;
+
+    }
+
+
+    .donation-card {
+
+        padding: 25px 18px;
+
+        border-radius: 15px;
+
+    }
+
+
+    .pix-icon {
+
+        font-size: 45px;
+
+    }
+
+
+    .donation-card img {
+
+        max-width: 180px;
+
+    }
+
+
+    .pix-key {
+
+        padding: 15px;
+
+        font-size: 14px;
+
+    }
+
+
+    .donation-card button {
+
+        padding: 14px;
+
+        font-size: 15px;
+
+    }
+
+}
+
+@media(max-width: 380px) {
+
+    .donation-text h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .donation-card {
+
+        padding: 20px 15px;
 
     }
 

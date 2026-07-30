@@ -1,131 +1,334 @@
-.page-header{
+.page-header {
 
-    background:#f8fbff;
+    background: #f8fbff;
 
-    padding:90px 0;
+    padding: 90px 0;
 
-    text-align:center;
-
-}
-
-.page-header h1{
-
-    font-size:48px;
-
-    margin-bottom:20px;
+    text-align: center;
 
 }
 
-.page-header p{
 
-    max-width:650px;
+.page-header h1 {
 
-    margin:auto;
+    font-size: 48px;
 
-    color:var(--text-light);
+    margin-bottom: 20px;
 
-}
-
-.about-page{
-
-    padding:100px 0;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:70px;
+    line-height: 1.2;
 
 }
 
-.about-image{
 
-    flex:1;
+.page-header p {
 
-}
+    max-width: 650px;
 
-.about-image img{
+    margin: auto;
 
-    width:100%;
+    color: var(--text-light);
 
-    border-radius:20px;
-
-    box-shadow:var(--shadow);
+    line-height: 1.7;
 
 }
 
-.about-text{
 
-    flex:1;
+/* Sobre */
 
-}
+.about-page {
 
-.about-text h2{
+    padding: 100px 0;
 
-    margin-bottom:25px;
+    display: flex;
 
-}
+    align-items: center;
 
-.about-text p{
-
-    margin-bottom:20px;
-
-    line-height:1.9;
-
-    color:var(--text-light);
+    gap: 70px;
 
 }
 
-.mission{
 
-    background:#f8fbff;
+.about-image {
 
-    padding:90px 0;
-
-}
-
-.mission-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:35px;
+    flex: 1;
 
 }
 
-.mission-grid div{
 
-    background:white;
+.about-image img {
 
-    padding:40px;
+    width: 100%;
 
-    border-radius:18px;
+    max-width: 600px;
 
-    box-shadow:var(--shadow);
+    display: block;
 
-}
+    border-radius: 20px;
 
-.mission-grid h3{
-
-    color:var(--primary);
-
-    margin-bottom:18px;
+    box-shadow: var(--shadow);
 
 }
 
-@media(max-width:900px){
 
-    .about-page{
+.about-text {
 
-        flex-direction:column;
+    flex: 1;
+
+}
+
+
+.about-text h2 {
+
+    margin-bottom: 25px;
+
+    font-size: 32px;
+
+}
+
+
+.about-text p {
+
+    margin-bottom: 20px;
+
+    line-height: 1.9;
+
+    color: var(--text-light);
+
+}
+
+
+
+/* Missão */
+
+.mission {
+
+    background: #f8fbff;
+
+    padding: 90px 0;
+
+}
+
+
+.mission-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 35px;
+
+}
+
+
+.mission-grid div {
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 18px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.mission-grid h3 {
+
+    color: var(--primary);
+
+    margin-bottom: 18px;
+
+}
+
+
+.mission-grid p {
+
+    color: var(--text-light);
+
+    line-height: 1.7;
+
+}
+
+
+
+/* Tablets */
+
+@media(max-width: 1000px) {
+
+
+    .about-page {
+
+        gap: 40px;
 
     }
 
-    .mission-grid{
 
-        grid-template-columns:1fr;
+    .page-header h1 {
+
+        font-size: 40px;
 
     }
+
+
+    .about-text h2 {
+
+        font-size: 28px;
+
+    }
+
+
+    .mission-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+
+}
+
+
+
+/* Tablets menores */
+
+@media(max-width: 900px) {
+
+
+    .about-page {
+
+        flex-direction: column;
+
+        padding: 70px 0;
+
+        text-align: center;
+
+    }
+
+
+    .about-image img {
+
+        margin: 0 auto;
+
+    }
+
+
+    .mission {
+
+        padding: 70px 0;
+
+    }
+
+
+    .mission-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+    }
+
+
+}
+
+
+
+/* Celulares */
+
+@media(max-width: 600px) {
+
+
+    .page-header {
+
+        padding: 60px 0;
+
+    }
+
+
+    .page-header h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .page-header p {
+
+        font-size: 15px;
+
+        padding: 0 15px;
+
+    }
+
+
+    .about-page {
+
+        padding: 50px 0;
+
+        gap: 35px;
+
+    }
+
+
+    .about-text h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .about-text p {
+
+        font-size: 15px;
+
+        line-height: 1.7;
+
+    }
+
+
+    .about-image img {
+
+        border-radius: 15px;
+
+    }
+
+
+    .mission {
+
+        padding: 50px 0;
+
+    }
+
+
+    .mission-grid div {
+
+        padding: 25px 20px;
+
+        border-radius: 15px;
+
+    }
+
+
+}
+
+
+
+/* Celulares pequenos */
+
+@media(max-width: 380px) {
+
+
+    .page-header h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    .mission-grid div {
+
+        padding: 22px 15px;
+
+    }
+
 
 }
