@@ -251,4 +251,17 @@ class Command(BaseCommand):
                     h_img.image.save(img_file_name, File(f), save=True)
 
         self.stdout.write(self.style.SUCCESS("Imagens do hospital salvas com sucesso!"))
+
+        # 6. Criar Superusuário Admin padrão (se não existir)
+        from django.contrib.auth.models import User
+        username = os.getenv('DJANGO_SUPERUSER_USERNAME', 'admin')
+        email = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@hospital.com')
+        password = os.getenv('DJANGO_SUPERUSER_PASSWORD', 'admin123')
+        
+        if not User.objects.filter(username=username).exists():
+            User.objects.create_superuser(username=username, email=email, password=password)
+            self.stdout.write(self.style.SUCCESS(f"Superusuário admin '{username}' criado com sucesso!"))
+        else:
+            self.stdout.write(self.style.SUCCESS(f"Superusuário '{username}' já existe."))
+
         self.stdout.write(self.style.SUCCESS("Carga de dados concluída!"))
