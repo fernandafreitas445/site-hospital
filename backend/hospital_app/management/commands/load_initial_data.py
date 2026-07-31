@@ -44,8 +44,10 @@ class Command(BaseCommand):
                 return None
 
         # Copiar imagens gerais
-        img_hospital = copy_image('hospital.png', media_hospital_dir)
-        img_sobre = copy_image('sobre.png', media_hospital_dir)
+        img_hospital1 = copy_image('hospital1.png', media_hospital_dir)
+        img_hospital2 = copy_image('hospital2.png', media_hospital_dir)
+        img_sobre_recep = copy_image('sobre_recep.png', media_hospital_dir)
+        img_logo = copy_image('logo_hosp.png', media_hospital_dir)
         
         # Copiar imagens dos médicos
         img_doc1 = copy_image('doctor1.png', media_doctors_dir)
@@ -223,14 +225,19 @@ class Command(BaseCommand):
         
         images_data = [
             {
-                'title': "Hospital Nossa Senhora do Brasil",
-                'img_file': 'hospital.png',
+                'title': "Hospital Nossa Senhora do Brasil - Início",
+                'img_file': 'hospital1.png',
                 'description': "Vista principal da fachada do Hospital Nossa Senhora do Brasil."
             },
             {
-                'title': "Atendimento Humanizado",
-                'img_file': 'sobre.png',
-                'description': "Equipe médica comprometida com a saúde e o bem-estar."
+                'title': "Hospital Nossa Senhora do Brasil - Sobre",
+                'img_file': 'hospital2.png',
+                'description': "Estrutura e instalações do Hospital Nossa Senhora do Brasil."
+            },
+            {
+                'title': "Hospital Nossa Senhora do Brasil - Recepção Sobre",
+                'img_file': 'sobre_recep.png',
+                'description': "Recepção e atendimento humanizado do Hospital Nossa Senhora do Brasil."
             }
         ]
 
@@ -244,4 +251,17 @@ class Command(BaseCommand):
                     h_img.image.save(img_file_name, File(f), save=True)
 
         self.stdout.write(self.style.SUCCESS("Imagens do hospital salvas com sucesso!"))
+
+        # 6. Criar Superusuário Admin padrão (se não existir)
+        from django.contrib.auth.models import User
+        username = os.getenv('DJANGO_SUPERUSER_USERNAME', 'admin')
+        email = os.getenv('DJANGO_SUPERUSER_EMAIL', 'admin@hospital.com')
+        password = os.getenv('DJANGO_SUPERUSER_PASSWORD', 'admin123')
+        
+        if not User.objects.filter(username=username).exists():
+            User.objects.create_superuser(username=username, email=email, password=password)
+            self.stdout.write(self.style.SUCCESS(f"Superusuário admin '{username}' criado com sucesso!"))
+        else:
+            self.stdout.write(self.style.SUCCESS(f"Superusuário '{username}' já existe."))
+
         self.stdout.write(self.style.SUCCESS("Carga de dados concluída!"))

@@ -1,5 +1,5 @@
 import "./AboutSection.css";
-import sobreFallback from "../../assets/images/sobre_recep.png";
+import sobreRecepFallback from "../../assets/images/sobre_recep.png";
 import { useNavigate } from "react-router-dom";
 import { useHospitalInfo, useHospitalImages } from "../../hooks/useApi";
 
@@ -8,12 +8,10 @@ function AboutSection() {
     const { data: info, loading: loadingInfo } = useHospitalInfo();
     const { data: images, loading: loadingImages } = useHospitalImages();
 
-    // Usa a segunda imagem para a seção Sobre (se disponível), senão usa a primeira
-    const sobreImage = !loadingImages && images.length > 1
-        ? images[1].image
-        : !loadingImages && images.length > 0
-            ? images[0].image
-            : sobreFallback;
+    // Busca a imagem sobre_recep no banco de dados; usa o fallback local se não carregou ou não encontrou
+    const sobreImage = !loadingImages && images.length > 0
+        ? (images.find(img => img.image?.includes('sobre_recep'))?.image || (images.length > 2 ? images[2].image : sobreRecepFallback))
+        : sobreRecepFallback;
 
     return (
         <section className="about">
@@ -22,7 +20,7 @@ function AboutSection() {
 
                 <div className="about-image">
                     <img
-                        src={loadingImages ? sobreFallback : sobreImage}
+                        src={loadingImages ? sobreRecepFallback : sobreImage}
                         alt="Sobre o Hospital"
                     />
                 </div>
